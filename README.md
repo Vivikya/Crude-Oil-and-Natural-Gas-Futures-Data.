@@ -6,4 +6,28 @@ Between January 2024 and July 2025, Brent (BZ=F) and WTI(CL=F) futures moved clo
 In contrast, Natural Gas (NG=F)** futures remained much lower, averaging $2–$4 per MMBtu with comparatively modest volatility.  
 
 Overall, oil benchmarks reflected cyclical swings tied to global demand and supply dynamics, while natural gas prices remained subdued over the same period.
+
 <img width="382" height="275" alt="crude_ng_futures" src="https://github.com/user-attachments/assets/84cf899d-06c9-47fa-95a1-59341e19f914" />
+
+```python
+import yfinance as yf
+import pandas as pd
+import matplotlib.pyplot as plt
+plt.style.use('seaborn-v0_8-darkgrid')
+
+
+tickers = ["BZ=F", "CL=F", "NG=F"]
+futures_data =yf.download(tickers, start="2024-01-01", end="2025-08-01")
+futures_data.index = pd.to_datetime(futures_data.index)
+print(futures_data.tail())
+
+plt.figure(figsize=(15,7))
+futures_data['Close'].plot()
+
+#set labels
+plt.title('Crude Oil & Natural Gas Futures Data', fontsize=15)
+plt.xlabel('Date', fontsize=15)
+plt.ylabel('Price in USD', fontsize=15)
+plt.legend()
+plt.show()
+```
